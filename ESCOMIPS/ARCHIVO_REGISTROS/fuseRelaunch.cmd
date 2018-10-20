@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "secureip" -o "/home/erick/Documentos/Software/Xilinx/ARCHIVO_REGISTROS/TB_ARCHIVO_REGISTROS_isim_beh.exe" -prj "/home/erick/Documentos/Software/Xilinx/ARCHIVO_REGISTROS/TB_ARCHIVO_REGISTROS_beh.prj" "work.TB_ARCHIVO_REGISTROS" 
