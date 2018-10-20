@@ -1,7 +1,7 @@
 Release 14.7 par P.20131013 (lin64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-erick-pc::  Fri Oct 19 20:00:46 2018
+erick-pc::  Fri Oct 19 23:25:56 2018
 
 par -w -intstyle ise -ol high -mt off ARCHIVO_DE_REGISTROS_map.ncd
 ARCHIVO_DE_REGISTROS.ncd ARCHIVO_DE_REGISTROS.pcf 
@@ -100,8 +100,8 @@ Specific Feature Utilization:
 Overall effort level (-ol):   High 
 Router effort level (-rl):    High 
 
-Starting initial Timing Analysis.  REAL time: 16 secs 
-Finished initial Timing Analysis.  REAL time: 16 secs 
+Starting initial Timing Analysis.  REAL time: 14 secs 
+Finished initial Timing Analysis.  REAL time: 14 secs 
 
 WARNING:Par:288 - The signal Mram_MEM12_RAMD_D1_O has no load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal Mram_MEM3_RAMD_D1_O has no load.  PAR will not attempt to route this signal.
@@ -110,27 +110,27 @@ WARNING:Par:288 - The signal Mram_MEM11_RAMD_D1_O has no load.  PAR will not att
 Starting Router
 
 
-Phase  1  : 685 unrouted;      REAL time: 17 secs 
+Phase  1  : 685 unrouted;      REAL time: 16 secs 
 
-Phase  2  : 615 unrouted;      REAL time: 18 secs 
+Phase  2  : 615 unrouted;      REAL time: 16 secs 
 
-Phase  3  : 221 unrouted;      REAL time: 18 secs 
+Phase  3  : 221 unrouted;      REAL time: 17 secs 
 
-Phase  4  : 221 unrouted; (Par is working to improve performance)     REAL time: 21 secs 
+Phase  4  : 221 unrouted; (Par is working to improve performance)     REAL time: 19 secs 
 
 Updating file: ARCHIVO_DE_REGISTROS.ncd with current fully routed design.
 
-Phase  5  : 0 unrouted; (Par is working to improve performance)     REAL time: 21 secs 
+Phase  5  : 0 unrouted; (Par is working to improve performance)     REAL time: 19 secs 
 
-Phase  6  : 0 unrouted; (Par is working to improve performance)     REAL time: 21 secs 
+Phase  6  : 0 unrouted; (Par is working to improve performance)     REAL time: 19 secs 
 
-Phase  7  : 0 unrouted; (Par is working to improve performance)     REAL time: 21 secs 
+Phase  7  : 0 unrouted; (Par is working to improve performance)     REAL time: 19 secs 
 
-Phase  8  : 0 unrouted; (Par is working to improve performance)     REAL time: 21 secs 
+Phase  8  : 0 unrouted; (Par is working to improve performance)     REAL time: 19 secs 
 
-Phase  9  : 0 unrouted; (Par is working to improve performance)     REAL time: 21 secs 
-Total REAL time to Router completion: 21 secs 
-Total CPU time to Router completion: 21 secs 
+Phase  9  : 0 unrouted; (Par is working to improve performance)     REAL time: 19 secs 
+Total REAL time to Router completion: 19 secs 
+Total CPU time to Router completion: 19 secs 
 
 Partition Implementation Status
 -------------------------------
@@ -169,8 +169,8 @@ All signals are completely routed.
 
 WARNING:Par:283 - There are 4 loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
 
-Total REAL time to PAR completion: 21 secs 
-Total CPU time to PAR completion: 21 secs 
+Total REAL time to PAR completion: 20 secs 
+Total CPU time to PAR completion: 20 secs 
 
 Peak Memory Usage:  1071 MB
 

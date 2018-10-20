@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2018-10-18T10:12:20</DateModified>
+  <DateModified>2018-10-19T23:27:06</DateModified>
   <ModuleName>ARCHIVO_DE_REGISTROS</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
-  <SavedFilePath>/home/erick/Documentos/Software/Xilinx/ARCHIVO_REGISTROS/iseconfig/ARCHIVO_DE_REGISTROS.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>/home/erick/Documentos/Software/Xilinx/ARCHIVO_REGISTROS/</ImplementationReportsDirectory>
+  <SavedFilePath>/home/erick/Documentos/GitHub/Computer-architecture/ESCOMIPS/ARCHIVO_REGISTROS/iseconfig/ARCHIVO_DE_REGISTROS.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>/home/erick/Documentos/GitHub/Computer-architecture/ESCOMIPS/ARCHIVO_REGISTROS/</ImplementationReportsDirectory>
   <DateInitialized>2018-10-17T08:50:08</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

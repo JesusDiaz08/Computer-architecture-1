@@ -33,6 +33,7 @@ USE ieee.std_logic_TEXTIO.ALL;	--PERMITE USAR STD_LOGIC
 USE ieee.std_logic_1164.ALL;
 USE ieee.std_logic_UNSIGNED.ALL;
 USE ieee.std_logic_ARITH.ALL;
+USE ieee.numeric_std.ALL;
  
  
 -- Uncomment the following library declaration if using
@@ -118,15 +119,15 @@ BEGIN
 	VARIABLE LINEA_VEC : LINE;
 	-----------	VALORES DE ENTRADA ----------
 	--READ_REGISTER1
-	VARIABLE VAR_ADDR_RD1 : STD_LOGIC_VECTOR (3 downto 0);
+	VARIABLE VAR_ADDR_RD1 : INTEGER;
 	--READ_REGISTER2
-	VARIABLE VAR_ADDR_RD2 : STD_LOGIC_VECTOR (3 downto 0);
+	VARIABLE VAR_ADDR_RD2 : INTEGER;
 	--SHAMT
-	VARIABLE VAR_SHAMT : STD_LOGIC_VECTOR (3 downto 0);
+	VARIABLE VAR_SHAMT : INTEGER;
 	--WRITE_REGISTER
-	VARIABLE VAR_ADDR_WR : STD_LOGIC_VECTOR (3 downto 0);
+	VARIABLE VAR_ADDR_WR : INTEGER;
 	--WRITE DATA
-	VARIABLE VAR_WD : STD_LOGIC_VECTOR (15 downto 0);
+	VARIABLE VAR_WD : STD_LOGIC_VECTOR (WD'RANGE);
 	--WE
 	VARIABLE VAR_WR : STD_LOGIC;
 	--SHE
@@ -139,55 +140,57 @@ BEGIN
 	--Aquí almacenamos cada línea que vamos a escribir sobre el archivo
 	VARIABLE LINEA_RES : LINE;
 	-----------	VALORES DE SALIDA ----------
-	VARIABLE VAR_DOUT1 : STD_LOGIC_VECTOR (15 DOWNTO 0);
-	VARIABLE VAR_DOUT2 : STD_LOGIC_VECTOR (15 DOWNTO 0);
+	VARIABLE VAR_DOUT1 : STD_LOGIC_VECTOR (DINOUT1'RANGE);
+	VARIABLE VAR_DOUT2 : STD_LOGIC_VECTOR (DOUT2'RANGE);
 	
-	VARIABLE CADENA : STRING (1 TO 4);
+	VARIABLE CADENA : STRING (1 TO 5);
    begin		
 		--Abrimos el archivo que contiene los vectores prueba
-		file_open(ARCH_VEC, "input.txt");
+		file_open(ARCH_VEC, "input.txt", read_mode);
 		--Abrimos el archivo que contendrá los resultados
-		file_open(ARCH_RES, "output.txt");
+		file_open(ARCH_RES, "output.txt", write_mode);
 		--------- ENCABEZADO DE LA TABLA ---------
-		CADENA := " RR1";
+		CADENA := "  RR1";
 		write(LINEA_RES, CADENA, right, CADENA'LENGTH + 1);
-		CADENA := " RR2";
+		CADENA := "  RR2";
 		write(LINEA_RES, CADENA, right, CADENA'LENGTH + 1);
-		CADENA := "  SH";
+		CADENA := "   SH";
 		write(LINEA_RES, CADENA, right, CADENA'LENGTH + 1);
-		CADENA := "WREG";
+		CADENA := " WREG";
 		write(LINEA_RES, CADENA, right, CADENA'LENGTH + 1);
-		CADENA := "  WD";
+		CADENA := "   WD";
 		write(LINEA_RES, CADENA, right, CADENA'LENGTH + 1);
-		CADENA := " SHE";
+		CADENA := "   WR";
 		write(LINEA_RES, CADENA, right, CADENA'LENGTH + 1);
-		CADENA := " DIR";
+		CADENA := "  SHE";
 		write(LINEA_RES, CADENA, right, CADENA'LENGTH + 1);
-		CADENA := " RD1";
+		CADENA := "  DIR";
 		write(LINEA_RES, CADENA, right, CADENA'LENGTH + 1);
-		CADENA := " RD2";
+		CADENA := "  RD1";
+		write(LINEA_RES, CADENA, right, CADENA'LENGTH + 1);
+		CADENA := "  RD2";
 		write(LINEA_RES, CADENA, right, CADENA'LENGTH + 1);
 		-- AÑADIMOS EL ENCABEZADO AL ARCHIVO
 		writeline(ARCH_RES, LINEA_RES);
 		
 		WAIT FOR 100 NS;
 		-- INICIAMOS LA LECTURA DEL ARCHIVO CON LOS VECTORES PRUEBA
-		FOR I IN 0 TO 9 LOOP
+		WHILE NOT endfile(ARCH_VEC) LOOP
 			--LEEMOS UNA LÍNEA COMPLETA DEL ARCHIVO
 			readline(ARCH_VEC, LINEA_VEC);
 			--Extraemos los valores dentro del archivo 
 			--EXTRAEMOS LO QUE EXISTE EN LA COLUMNA READ_REGISTER1
 			read(LINEA_VEC, VAR_ADDR_RD1);
-			ADDR_RD1 <= VAR_ADDR_RD1;
+			ADDR_RD1 <= std_logic_vector(to_unsigned(VAR_ADDR_RD1, ADDR_RD1'LENGTH));
 			--EXTRAEMOS LO QUE EXISTE EN LA COLUMNA READ_REGISTER2
 			read(LINEA_VEC, VAR_ADDR_RD2);
-			ADDR_RD2 <= VAR_ADDR_RD2;
+			ADDR_RD2 <= std_logic_vector(to_unsigned(VAR_ADDR_RD2, ADDR_RD2'LENGTH));
 			--EXTRAEMOS LO QUE EXISTE EN LA COLUMNA SHAMT
 			read(LINEA_VEC, VAR_SHAMT);
-			SHAMT <= VAR_SHAMT;
+			SHAMT <= std_logic_vector(to_unsigned(VAR_SHAMT, SHAMT'LENGTH));
 			--EXTRAEMOS LO QUE EXISTE EN LA COLUMNA WRITE_REGISTER
 			read(LINEA_VEC, VAR_ADDR_WR);
-			ADDR_WR <= VAR_ADDR_WR;
+			ADDR_WR <= std_logic_vector(to_unsigned(VAR_ADDR_WR, ADDR_WR'LENGTH));
 			--EXTRAEMOS LO QUE EXISTE EN LA COLUMNA WRITE_DATA
 			hread(LINEA_VEC, VAR_WD);
 			WD <= VAR_WD;
@@ -202,29 +205,30 @@ BEGIN
 			DIR <= VAR_DIR;
 		
 			WAIT UNTIL RISING_EDGE(CLK); --ESPERAMOS AL FLANCO DE SUBIDA
-			VAR_DOUT1 := DINOUT1;
-			VAR_DOUT2 := DOUT2;	
+--			VAR_DOUT1 := DINOUT1;
+--			VAR_DOUT2 := DOUT2;	
 			-- Escribimos el resultado
 			--ESCRIBE RR1
-			hwrite(LINEA_RES, VAR_ADDR_RD1, right, 5);
+			hwrite(LINEA_RES, ADDR_RD1, right, 6);
 			--ESCRIBE RR2
-			hwrite(LINEA_RES, VAR_ADDR_RD2, right, 5);
+			hwrite(LINEA_RES, ADDR_RD2, right, 6);
 			--ESCRIBE SH
-			hwrite(LINEA_RES, VAR_SHAMT, right, 5);
+			hwrite(LINEA_RES, SHAMT, right, 6);
 			--ESCRIBE WREG
-			hwrite(LINEA_RES, VAR_ADDR_WR, right, 5);
+			hwrite(LINEA_RES, ADDR_WR, right, 6);
 			--ESCRIBE WD
-			hwrite(LINEA_RES, VAR_WD, right, 5);
+			hwrite(LINEA_RES, WD, right, 6);
 			--ESCRIBE WR
-			write(LINEA_RES, VAR_WR, right, 5);
+			write(LINEA_RES, WR, right, 6);
 			--ESCRIBE SHE
-			write(LINEA_RES, VAR_SHE, right, 5);
+			write(LINEA_RES, SHE, right, 6);
 			--ESCRIBE DIR
-			write(LINEA_RES, VAR_DIR, right, 5);
+			write(LINEA_RES, DIR, right, 6);
 			--ESCRIBE RD1
-			hwrite(LINEA_RES, VAR_DOUT1, right, 5);
+			hwrite(LINEA_RES, DINOUT1, right, 6);
 			--ESCRIBE RD2
-			hwrite(LINEA_RES, VAR_DOUT2, right, 5);
+			hwrite(LINEA_RES, DOUT2, right, 6);
+			WRITELINE(ARCH_RES, LINEA_RES);
       END LOOP;
 		--CERRAMOS EL ARCHIVO CON LOS VECTORES PRUEBA
 		file_close(ARCH_VEC);
